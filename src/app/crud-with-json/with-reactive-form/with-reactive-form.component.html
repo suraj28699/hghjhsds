@@ -1,0 +1,70 @@
+<p>with-reactive-form works!</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form [formGroup]="myForm" (ngSubmit)="myForm.status=='VALID'&& onSubmit(myForm)">
+                <div class="form-group">
+                    <input type="hidden" name="id" formControlname="id">
+                </div>
+                <div class="form-group">
+                    <label for="fname">Full Name:</label>
+                    <input type="text" name="fname" formControlName="fname" class="form-control"
+                        [ngClass]="{err2:f.fname.errors && isSubmitted}">
+
+                    <div *ngIf="f.fname.errors && isSubmitted" class="err1">
+                        Name is required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" formControlName="email" class="form-control"
+                        [ngClass]="{err2: f.email.errors && isSubmitted}">
+                    <div class="err1" *ngIf="f.email.errors && isSubmitted">
+                        Email is required
+                    </div>
+
+                    <div class="err1" *ngIf="f.email.errors?.['pattern'] && isSubmitted">
+                        Please enter valid email
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="num">Mobile</label>
+                    <input type="number" name="num" formControlName="num" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <input type="radio" name="gender" value="male" formControlName="gender">
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" value="female" formControlName="gender">
+                    <label for="female">Female</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-info" (click)="forValidation()">Submit</button>
+                    <button type="button" class="btn btn-outline-success" (click)="update(myForm)">Update</button>
+                    <button type="reset" class="btn btn-outline-warning">Reset</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <table class="table table-responsive">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Number</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngFor="let i of allData">
+                    <td>{{i.fname}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.num}}</td>
+                    <td>{{i.gender}}</td>
+                    <td><button class="btn btn-outline-warning" (click)="onDel(i)">Delete</button></td>
+                    <td><button class="btn btn-outline-info" (click)="edit(i)">Edit</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

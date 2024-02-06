@@ -1,0 +1,15 @@
+{
+  "posts": [],
+  "reactiveData": [
+    {
+      "fname": "suraj",
+      "email": "suraj25@gmail.com",
+      "num": 1,
+      "gender": "male",
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

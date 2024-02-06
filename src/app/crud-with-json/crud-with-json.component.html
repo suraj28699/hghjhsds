@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-6 bgImg">
+        <p>crud-with-json works!</p>
+        <form name="myForm" #frm="ngForm" (ngSubmit)="frm.form.valid && onSubmit(frm)">
+            <div class="form-group">
+                <input type="hidden" name="id" #id="ngModel" ngModel [(ngModel)]="idd">
+            </div>
+            <div class="form-group">
+                <label for="fname">Full Name:</label>
+                <input type="text" name="fname" class="form-control" #fname="ngModel" ngModel [(ngModel)]="fn" required
+                    [ngClass]="{'is-invalid':frm.submitted && fname.invalid}">
+                <div *ngIf="frm.submitted && fname.invalid" class="invalid-feedback">
+                    Name is required
+                </div>
+            </div>
+            <div class="formgroup">
+                <label for="email">Eamil:</label>
+                <input type="email" name="email" class="form-control" #email="ngModel" ngModel [(ngModel)]="eml" required
+                    [ngClass]="{'is-invalid':frm.submitted && email.invalid}"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <!-- <div *ngIf="frm.submitted && email.invalid" class="invalid-feedback">
+                    Email is required
+                </div>
+                <div *ngIf="email.errors?.['pattern']" class="invalid-feedback">
+                    Please enter valid email
+                </div> -->
+                <div *ngIf="email.touched" class="invalid-feedback">
+                    <p *ngIf="email.errors?.['required']">
+                        Email is required</p>
+                        <p *ngIf="email.errors?.['pattern']">Please enter valid email</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pass">Password:</label>
+                <input type="password" name="pass" class="form-control" #pass="ngModel" ngModel [(ngModel)]="ps"
+                required [ngClass]="{'is-invalid':frm.submitted && pass.invalid}">
+                <div *ngIf="frm.submitted && pass.invalid" class="invalid-feedback">
+                    Password is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+                <button type="button" class="btn btn-outline-success" (click)="update(frm)">Update</button>
+                <button type="reset" class="btn btn-outline-dark">Reset</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-6">
+        <table class="table table-responsive ">
+            <tr>
+                <th>Id </th>
+                <th>Name</th>
+                <th>Email</th>
+                <Th>Action</Th>
+                <th>Action</th>
+            </tr>
+            <tr *ngFor="let i of allData">
+                <td>{{i.id}}</td>
+                <td>{{i.fname}}</td>
+                <td>{{i.email}}</td>
+                <td><button (click)="onDel(i)" class="btn btn-outline-danger">Delete</button></td>
+                <td><button (click)="edit(i)" class="btn btn-outline-secondary">Edit</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
